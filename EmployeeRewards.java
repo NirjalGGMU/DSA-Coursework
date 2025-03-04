@@ -1,3 +1,6 @@
+// QN 2a - EmployeeRewards
+
+
 /*
 Short Explanation:
 Problem: Distribute candies to employees based on their ratings while following these rules:

@@ -1,3 +1,5 @@
+// QN.3a - DeviceConnectionCostCalculator
+
 import java.util.*;
 
 public class DeviceConnectionCostCalculator { // Class to compute the minimum cost to connect all devices
@@ -98,3 +100,5 @@ public class DeviceConnectionCostCalculator { // Class to compute the minimum co
         System.out.println("Minimum total cost to connect all devices: " + result); // Expected output: 3
     }
 }
+
+// Output: Minimum total cost to connect all devices: 3

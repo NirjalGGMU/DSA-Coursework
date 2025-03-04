@@ -1,3 +1,16 @@
+//QN 2b - Closest Points
+
+
+// Step 1: Initialize the minimum distance to maximum possible value.
+// Step 2: Create an array to store the result indices initialized with [-1, -1].
+// Step 3: Use nested loops to iterate through all pairs of points.
+// Step 4: Calculate the Manhattan distance between each pair of points.
+// Step 5: If the calculated distance is smaller than the current minimum distance, update the minimum distance and result pair.
+// Step 6: If the distance is equal to the minimum distance, update the result pair if the current pair is lexicographically smaller.
+// Step 7: Continue the iteration until all pairs are checked.
+// Step 8: Return the result array containing the indices of the closest pair.
+
+
 import java.util.Arrays;
 
 public class ClosestPoints {
@@ -68,3 +81,4 @@ public class ClosestPoints {
         System.out.println("Closest pair indices: " + Arrays.toString(result));
     }
 } 
+// Output: Closest pair indices: [0, 3]

@@ -1,3 +1,5 @@
+// QN 4b - MinimumRoads
+
 
 import java.util.*;
 
@@ -155,3 +157,5 @@ public class MinimumRoads {
         System.out.println(minRoads(packages, roads)); 
     }
 }
+
+// Output: 2

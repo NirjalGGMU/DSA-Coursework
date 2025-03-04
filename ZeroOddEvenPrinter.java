@@ -1,3 +1,6 @@
+// QN 6A - ZeroOddEvenPrinter
+
+
 /*
 Problem: Print a sequence in the format 0, odd, 0, even, 0, odd, ... up to a given number n using three synchronized threads.
 

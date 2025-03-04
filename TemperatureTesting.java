@@ -1,3 +1,7 @@
+// Question no. 1 (a) - Temperature Testing
+
+
+
 public class TemperatureTesting { // Class to determine the minimum tests needed for temperature levels
 
     // Method to compute the least number of tests required
@@ -38,3 +42,5 @@ public class TemperatureTesting { // Class to determine the minimum tests needed
         System.out.println(minMeasurements(3, 14)); // Expected output: 4
     }
 }
+
+// Output: 2  3  4

@@ -1,3 +1,6 @@
+// Question no. 1 (b) - Kth Smallest Product
+
+
 /*
 Task: Find and show the top 3 hashtags from tweets, sorted by how often they appear.
 
