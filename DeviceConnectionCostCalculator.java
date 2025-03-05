@@ -1,5 +1,21 @@
 // QN.3a - DeviceConnectionCostCalculator
 
+/*
+ * This program calculates the minimum cost required to connect all devices in a network.
+ * It uses Kruskal’s Minimum Spanning Tree (MST) algorithm to find the lowest cost connections between devices.
+ * Additionally, it considers the cheapest module cost required for operation.
+ * 
+ * Algorithm:
+ * 1. Convert the given connections into a list of edges.
+ * 2. Sort the edges in ascending order based on their cost.
+ * 3. Use the Union-Find data structure to apply Kruskal’s algorithm:
+ *    - Iterate through sorted edges and add them to the MST if they connect different sets.
+ * 4. Compute the total cost of the MST.
+ * 5. Add the cost of the cheapest module.
+ * 6. Return the minimum total cost.
+ */
+
+
 import java.util.*;
 
 public class DeviceConnectionCostCalculator { // Class to compute the minimum cost to connect all devices

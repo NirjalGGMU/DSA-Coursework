@@ -1,10 +1,20 @@
-// QN 4b - MinimumRoads
+/* 4b - Minimum Roads
 
+
+Algorithm for MinimumRoads:
+1. Identify nodes containing packages.
+2. Build an adjacency list from the given roads.
+3. Precompute coverage of package nodes within two steps for each node.
+4. Compute shortest paths between all node pairs using BFS.
+5. Use BFS with bitmasking to determine the shortest path covering all package nodes and returning to the start.
+6. Return the minimum steps required; if not possible, return -1.
+*/
 
 import java.util.*;
 
 public class MinimumRoads {
 
+    // State class for BFS traversal (current node, bitmask for covered packages, step count)
     static class State {
         int node;
         int mask;
@@ -17,10 +27,12 @@ public class MinimumRoads {
         }
     }
 
+    // Function to compute the minimum roads required
     public static int minRoads(int[] packages, int[][] roads) {
         int n = packages.length;
         if (n == 0) return 0;
 
+        // Identify nodes containing packages
         List<Integer> packageNodes = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             if (packages[i] == 1) {
@@ -30,18 +42,25 @@ public class MinimumRoads {
         int m = packageNodes.size();
         if (m == 0) return 0;
 
+        // Build adjacency list representation of the graph
         List<List<Integer>> adj = buildAdjacencyList(n, roads);
+
+        // Precompute package coverage within two steps for each node
         int[] coverage = precomputeCoverage(n, adj, packageNodes);
+
+        // Precompute shortest paths between all node pairs
         int[][] shortestPaths = precomputeShortestPaths(n, adj);
 
         int minTotal = Integer.MAX_VALUE;
 
+        // Try starting from each node
         for (int start = 0; start < n; start++) {
             int initialMask = coverage[start];
             if (initialMask == (1 << m) - 1) {
-                return 0;
+                return 0; // All packages already covered at start
             }
 
+            // BFS traversal to find the shortest path covering all package nodes
             Queue<State> queue = new LinkedList<>();
             boolean[][] visited = new boolean[n][1 << m];
             queue.add(new State(start, initialMask, 0));
@@ -51,6 +70,8 @@ public class MinimumRoads {
 
             while (!queue.isEmpty()) {
                 State curr = queue.poll();
+                
+                // If all packages are covered, check return steps
                 if (curr.mask == (1 << m) - 1) {
                     int returnSteps = shortestPaths[curr.node][start];
                     if (returnSteps != -1) {
@@ -59,6 +80,7 @@ public class MinimumRoads {
                     continue;
                 }
 
+                // Explore neighbors
                 for (int neighbor : adj.get(curr.node)) {
                     int newMask = curr.mask | coverage[neighbor];
                     int newSteps = curr.steps + 1;
@@ -69,14 +91,13 @@ public class MinimumRoads {
                 }
             }
 
-            if (currentMin < minTotal) {
-                minTotal = currentMin;
-            }
+            minTotal = Math.min(minTotal, currentMin);
         }
 
         return minTotal == Integer.MAX_VALUE ? -1 : minTotal;
     }
 
+    // Build adjacency list from road connections
     private static List<List<Integer>> buildAdjacencyList(int n, int[][] roads) {
         List<List<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -91,6 +112,7 @@ public class MinimumRoads {
         return adj;
     }
 
+    // Compute coverage mask for each node
     private static int[] precomputeCoverage(int n, List<List<Integer>> adj, List<Integer> packageNodes) {
         int m = packageNodes.size();
         int[] coverage = new int[n];
@@ -107,6 +129,7 @@ public class MinimumRoads {
         return coverage;
     }
 
+    // Get all nodes reachable within two steps from a given node
     private static Set<Integer> getNodesWithinTwoSteps(int u, List<List<Integer>> adj) {
         Set<Integer> visited = new HashSet<>();
         Queue<Integer> queue = new LinkedList<>();
@@ -127,10 +150,10 @@ public class MinimumRoads {
             }
             steps++;
         }
-
         return visited;
     }
 
+    // Precompute shortest paths using BFS for all node pairs
     private static int[][] precomputeShortestPaths(int n, List<List<Integer>> adj) {
         int[][] dist = new int[n][n];
         for (int i = 0; i < n; i++) {
@@ -152,10 +175,9 @@ public class MinimumRoads {
     }
 
     public static void main(String[] args) {
-        int[] packages = {0,0,0,1,1,0,0,1}; 
-        int[][] roads = {{0, 1}, {0, 2}, {1, 3}, {1, 4}, {2, 5}, {5,6}, {5,7}};
-        System.out.println(minRoads(packages, roads)); 
+        int[] packages = {0,0,0,1,1,0,0,1}; // Package presence at each node
+        int[][] roads = {{0, 1}, {0, 2}, {1, 3}, {1, 4}, {2, 5}, {5,6}, {5,7}}; // Road connections
+        
+        System.out.println(minRoads(packages, roads)); // Expected output: 2
     }
 }
-
-// Output: 2
