@@ -2,7 +2,7 @@
 
 
 
-public class TemperatureTesting { // Class to determine the minimum tests needed for temperature levels
+public class TemperatureTestCalculator { // Class to determine the minimum tests needed for temperature levels
 
     // Method to compute the least number of tests required
     public static int minMeasurements(int k, int n) {
